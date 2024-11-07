@@ -1,4 +1,4 @@
-import Diagramm from "./diagramm";
+// import Diagramm from "./diagramm";
 
 export default function ScoreCard({ quizResult, testId }: any) {
 
