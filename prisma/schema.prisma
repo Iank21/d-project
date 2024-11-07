@@ -11,14 +11,14 @@ datasource db {
 }
 
 model Test {
-  id            String       @id
-  name          String
-  author        String
-  description   String
-  instruction   String
-  questions     Question[]
-  interpretation Interpretation[]
-  answers       AnswerTest[]
+  id              String       @id
+  name            String
+  author          String
+  description     String
+  instruction     String
+  questions       Question[]
+  interpretation  Interpretation[]
+  answers         AnswerTest[]
 }
 
 model Question {
