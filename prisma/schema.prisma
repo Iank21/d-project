@@ -18,6 +18,7 @@ model Test {
   instruction   String
   questions     Question[]
   interpretation Interpretation[]
+  answers       AnswerTest[]
 }
 
 model Question {
@@ -35,6 +36,15 @@ model Answer {
   point         Int
   question      Question    @relation(fields: [question_id], references: [id])
   question_id   String
+}
+
+// привязка ответ-тест
+model AnswerTest {
+  id            String      @default(cuid()) @id
+  name          String
+  point         Int
+  test          Test    @relation(fields: [test_id], references: [id])
+  test_id       String
 }
 
 model Interpretation {
