@@ -2,13 +2,7 @@ import { Question_Answer } from '@/app/data/definitions';
 import { getAnswersForOneTest, getQuestionsForOneTest, getTestInfo } from '@/app/data/data';
 import QuizInfo from '@/app/ui/tests/quizInfo';
 
-type TestPageProps = {
-  params: {
-    testId: string;
-  };
-};
-
-export default async function Page({ params }: TestPageProps) {
+export default async function Page({ params }: any) {
 
   const { testId } = await params;
 
