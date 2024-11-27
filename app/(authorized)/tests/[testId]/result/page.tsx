@@ -1,13 +1,12 @@
-import TestCard from "@/app/ui/tests/testsCard";
-
 export default function Page() {
+  
 
   return (
     <>
       <h1 className={`mb-6 text-xl md:text-2xl font-bold`}>
-        Список тестов
+        Результат тестирования
       </h1>
-      <TestCard/>
+      
     </>
   );
 }

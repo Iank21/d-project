@@ -1,5 +1,5 @@
 import { Question_Answer } from '@/app/data/definitions';
-import { getQuestionsForOneTest, getTestInfo } from '@/app/data/data';
+import { getAnswersForOneTest, getQuestionsForOneTest, getTestInfo } from '@/app/data/data';
 import QuizInfo from '@/app/ui/tests/quizInfo';
 
 export default async function Page({ params }: any) {
@@ -10,7 +10,7 @@ export default async function Page({ params }: any) {
 
   const test_questions = await getQuestionsForOneTest(testId);
     
-  // const answers = await getAnswersForOneTest(testId);
+  const answers = await getAnswersForOneTest(testId);
 
   const fullTest: Question_Answer[] = [];
 
@@ -21,7 +21,7 @@ export default async function Page({ params }: any) {
       id: q_id,
       name: test_questions[i].name,
       number: test_questions[i].number,
-      answers: [],
+      answers: answers,
     })
   }
 

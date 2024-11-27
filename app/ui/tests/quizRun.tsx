@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import ScoreCard from './scoreCard';
+import { create } from '@/app/data/data';
 
 export default function QuizRun({testData, testId}: any) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -62,28 +62,44 @@ export default function QuizRun({testData, testId}: any) {
 		}
 	};
 
+  let result = {}
+  if (testId === 'mbi') {
+    result = quizResultMbi
+  } else {
+    result = quizResult
+  }
+
   return (
     <>
-    	<div>
+    <div>
         {!showResults ? (
             <div>
-              <b>Вопрос: {currentQuestionIndex + 1}/{testData.length}</b>
-              <h4 className='text-lg mb-4'>{testData[currentQuestionIndex].number}. {testData[currentQuestionIndex].name}</h4>
-              <div className='flex gap-4 max-w-2xl	flex-wrap'>
-                {testData[currentQuestionIndex].answers.map((answer: any, idx: any) => (
-                  <div
-                    key={idx}
-                    onClick={() => onAnswerSelected(answer)}
-                    className='max-w-32 w-full cursor-pointer text-center rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400'
-                  >
-                    {answer.name}
-                  </div>
-                ))}
-              </div>
+            <b>Вопрос: {currentQuestionIndex + 1}/{testData.length}</b>
+            <h4 className='h-16	text-lg mb-4'>{testData[currentQuestionIndex].number}. {testData[currentQuestionIndex].name}</h4>
+            <div className='flex gap-4 max-w-2xl	flex-wrap'>
+              {testData[currentQuestionIndex].answers.map((answer: any, idx: any) => (
+                <div
+                  key={idx}
+                  onClick={() => onAnswerSelected(answer)}
+                  className='max-w-36	 w-full cursor-pointer text-center rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400'
+                >
+                  {answer.name}
+                </div>
+              ))}
             </div>
+          </div>
           ) : (
             <>
-              <ScoreCard quizResult={testId === 'mbi' ? quizResultMbi : quizResult} testId={testId}/>
+              {/* <Link
+                href={{
+                  pathname: `/tests/${testId}/result`,
+                  query: result, 
+                }}
+                className="cursor-pointer w-fit flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
+              >
+                Посмотреть результат
+              </Link> */}
+              <button onClick={() => create(result)}>Create</button>
             </>
           )}
       </div>

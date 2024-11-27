@@ -12,3 +12,6 @@ npx prisma db push
 
 // команда для генерации клиента Prisma на основе схемы (schema.prisma)
 npx prisma generate
+
+// сборка проекта 
+npm run build

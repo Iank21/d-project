@@ -11,38 +11,31 @@ datasource db {
 }
 
 model Test {
-  id              String       @id
-  name            String
+  id              String      @id
+  name            String      
   author          String
   description     String
   instruction     String
-  questions       Question[]
-  interpretation  Interpretation[]
-  answers         AnswerTest[]
+  
+  Question        Question[]
+  Answer          Answer[]
+  Interpretation  Interpretation[]
 }
 
 model Question {
   id            String      @default(cuid()) @id
   name          String
-  number        String
+  number        Int
+
   test          Test        @relation(fields: [test_id], references: [id])
   test_id       String
-  answers       Answer[]
 }
 
 model Answer {
   id            String      @default(cuid()) @id
   name          String
   point         Int
-  question      Question    @relation(fields: [question_id], references: [id])
-  question_id   String
-}
 
-// привязка ответ-тест
-model AnswerTest {
-  id            String      @default(cuid()) @id
-  name          String
-  point         Int
   test          Test    @relation(fields: [test_id], references: [id])
   test_id       String
 }
@@ -52,6 +45,80 @@ model Interpretation {
   description          String
   maxPoint             Int
   minPoint             Int
+
   test                 Test        @relation(fields: [test_id], references: [id])
   test_id              String
+}
+
+model User {
+  id                  String      @id @default(cuid())
+  name                String
+  surname             String
+  department          String
+  email               String      @unique
+  hashedPassword      String
+  role                Role        @default(USER)
+
+  Sessions            Session[]
+  History_Stress      History_Stress[]
+  History_Overworking History_Overworking[]
+  History_Burnout     History_Burnout[]
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  userId    String
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model History_Stress {
+  id              String      @id @default(cuid())
+  date            DateTime
+  point           Int
+  level           Level
+
+  user            User        @relation(fields: [user_id], references: [id])
+  user_id         String
+}
+
+model History_Overworking {
+  id              String      @id @default(cuid())
+  date            DateTime
+  hours           Int
+
+  user            User        @relation(fields: [user_id], references: [id])
+  user_id         String
+}
+
+model History_Burnout {
+  id              String      @id @default(cuid())
+  date            DateTime
+
+  user            User        @relation(fields: [user_id], references: [id])
+  user_id         String
+
+  History_Burnout_Item History_Burnout_Item[]
+}
+
+model History_Burnout_Item {
+  id                      String                @id @default(cuid())
+  name                    String
+  point                   Int
+  level                   Level
+
+  History_Burnout         History_Burnout       @relation(fields: [History_Burnout_id], references: [id])
+  History_Burnout_id      String
+}
+
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Level {
+  LOW
+  MEDIUM
+  HIGH
 }

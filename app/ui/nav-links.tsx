@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import { AccountIcon, HistoryIcon, HomeIcon, OverworkingIcon, TestIcon } from '../icons';
+import { AccountIcon, HistoryIcon, HomeIcon, OverworkingIcon, TestIcon } from './icons';
 
 const links = [
   { 

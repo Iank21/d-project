@@ -32,6 +32,6 @@ export type AnswerTest = {
 export type Question_Answer = {
   id: string;
   name: string;
-  number: string;
+  number: number;
   answers: AnswerTest[];
 }

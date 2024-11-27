@@ -55,15 +55,36 @@ export async function getAnswers() {
 }
 
 // Список ответов для одного теста (ищем по id)
-// export async function getAnswersForOneTest(id: string) {
-//   try {
-//     const data = await prisma.answerTest.findMany({
-//       where: { test_id: id }
-//     });
+export async function getAnswersForOneTest(id: string) {
+  try {
+    const data = await prisma.answer.findMany({
+      where: { test_id: id }
+    });
 
-//     return data;
-//   } catch (error) {
-//     console.error('Database Error:', error);
-//     throw new Error('Database Error');
-//   }
-// }
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Database Error');
+  }
+}
+
+// Список интерпретация для одного теста
+export async function getInterpretationForOneTest(id: string) {
+  try {
+    const data = await prisma.interpretation.findMany({
+      where: { test_id: id }
+    });
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Database Error');
+  }
+}
+
+
+export async function create(data: any) {
+  // отправляем данные в БД 
+
+  // редиректим 
+}

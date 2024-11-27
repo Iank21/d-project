@@ -1,18 +1,17 @@
-import Link from 'next/link';
+import { signIn } from "@/app/features/auth/actions/sign-in";
 
-//Форма входа в систему
-const SignInForm = () => {
+export default function SignInForm() {
   return (
-    <div className='form-div'>
-    {/* <form action={signIn} className="form">
-      <input name="email" placeholder="Email или логин" />
-      <input name="password" type="password" placeholder="Пароль" />
-      <button className='button' type="submit">Войти в систему</button>
+    <form action={signIn} className="max-w-sm">
+      <div className="mb-5">
+        <label htmlFor="email" className="block mb-2 font-medium text-gray-900">Email</label>
+        <input name="email" type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@d-project.com" required />
+      </div>
+      <div className="mb-5">
+        <label htmlFor="password" className="block mb-2 font-medium text-gray-900">Пароль</label>
+        <input name="password" type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+      </div>
+      <button type="submit" className="btn-default">Войти</button>
     </form>
-    <p>Еще нет аккаунта?</p>
-    <Link href="/auth/sign-up">Зарегистрироваться</Link> */}
-    </div>
   );
-};
-
-export { SignInForm };
+}
