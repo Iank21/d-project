@@ -15,7 +15,7 @@ export default function Page() {
           </h2>
           <SignInForm />
 
-          {/* <div className="mt-4">
+          <div className="mt-4">
             <p className="text-base text-gray-800">Данные для входа:</p>
             <div className="relative overflow-x-auto">
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 select-text">
@@ -58,7 +58,7 @@ export default function Page() {
                 </tbody>
               </table>
             </div>
-          </div> */}
+          </div>
         </div>
         <div className="flex items-center p-6 md:w-3/5 md:px-28 md:py-12">
           <Image

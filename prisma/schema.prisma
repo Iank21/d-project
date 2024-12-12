@@ -74,7 +74,7 @@ model Session {
 
 model History_Stress {
   id              String      @id @default(cuid())
-  date            DateTime
+  date            DateTime    @default(now())
   point           Int
   level           Level
 
@@ -84,7 +84,7 @@ model History_Stress {
 
 model History_Overworking {
   id              String      @id @default(cuid())
-  date            DateTime
+  date            DateTime    @default(now())
   hours           Int
 
   user            User        @relation(fields: [user_id], references: [id])
@@ -93,7 +93,7 @@ model History_Overworking {
 
 model History_Burnout {
   id              String      @id @default(cuid())
-  date            DateTime
+  date            DateTime    @default(now())
 
   user            User        @relation(fields: [user_id], references: [id])
   user_id         String

@@ -38,8 +38,11 @@ const signIn = async (formData: FormData) => {
     cookieStore.set(
       sessionCookie.name,
       sessionCookie.value,
-      sessionCookie.attributes
+      sessionCookie.attributes,
     );
+
+    cookieStore.set('userId', user.id);
+
   } catch (error) {
     console.log(error);
   }

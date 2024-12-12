@@ -1,5 +1,7 @@
 // Здесь распологаются схемы для данных из БД
 
+import { Level } from "@prisma/client";
+
 export type Test = {
   id: string;
   name: string;
@@ -35,3 +37,11 @@ export type Question_Answer = {
   number: number;
   answers: AnswerTest[];
 }
+
+export type StressItem = {
+  id: string;
+  date: Date;
+  point: number;
+  level: Level;
+  user_id: string;
+};

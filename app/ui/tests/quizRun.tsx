@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { create } from '@/app/data/data';
+import { createHistoryTest } from '@/app/features/data/data';
+import { Level } from '@prisma/client';
 
 export default function QuizRun({testData, testId}: any) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -13,10 +14,13 @@ export default function QuizRun({testData, testId}: any) {
   const [quizResultMbi, setQuizResultMbi] = useState({
 		// 1. «Эмоциональное истощение» - ответы по пунктам 1, 2, 3, 6, 8, 13, 14, 16, 20.
     param_1: 0,
+    level_1: '',
     // 2. «Деперсонализация» - ответы по пунктам 5, 10, 11, 15, 22.
     param_2: 0,
+    level_2: '',
     // 3. «Редукция личных достижений» - ответы по пунктам 4, 7, 9, 12, 17, 18, 19, 21.
     param_3: 0,
+    level_3: '',
 	});
 
   const onAnswerSelected = (answer: any) => {
@@ -62,11 +66,44 @@ export default function QuizRun({testData, testId}: any) {
 		}
 	};
 
-  let result = {}
+  let result;
+  let level: Level;
   if (testId === 'mbi') {
-    result = quizResultMbi
+    if(quizResultMbi.param_1 < 16) {
+      quizResultMbi.level_1 = Level.LOW
+    } else if (quizResultMbi.param_1 > 15 && quizResultMbi.param_1 < 25){
+      quizResultMbi.level_1 = Level.MEDIUM
+    } else {
+      quizResultMbi.level_1 = Level.HIGH
+    }
+
+    if(quizResultMbi.param_2 < 6) {
+      quizResultMbi.level_2 = Level.LOW
+    } else if (quizResultMbi.param_2 > 5 && quizResultMbi.param_2 < 11){
+      quizResultMbi.level_2 = Level.MEDIUM
+    } else {
+      quizResultMbi.level_2 = Level.HIGH
+    }
+
+    if(quizResultMbi.param_3 < 31) {
+      quizResultMbi.level_3 = Level.LOW
+    } else if (quizResultMbi.param_3 > 30 && quizResultMbi.param_3 < 37){
+      quizResultMbi.level_3 = Level.MEDIUM
+    } else {
+      quizResultMbi.level_3 = Level.HIGH
+    }
+    
+    result = quizResultMbi;
+
   } else {
-    result = quizResult
+    result = quizResult.score
+    if (result < 100 ) {
+      level = Level.LOW
+    } else if (result > 99 && result < 156) {
+      level = Level.MEDIUM
+    } else {
+      level = Level.HIGH
+    }
   }
 
   return (
@@ -90,16 +127,8 @@ export default function QuizRun({testData, testId}: any) {
           </div>
           ) : (
             <>
-              {/* <Link
-                href={{
-                  pathname: `/tests/${testId}/result`,
-                  query: result, 
-                }}
-                className="cursor-pointer w-fit flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-              >
-                Посмотреть результат
-              </Link> */}
-              <button onClick={() => create(result)}>Create</button>
+              <button className="cursor-pointer w-fit flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base" 
+              onClick={() => createHistoryTest(result, testId, level)}>Посмотреть результат</button>
             </>
           )}
       </div>

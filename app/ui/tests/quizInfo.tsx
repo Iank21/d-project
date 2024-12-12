@@ -12,16 +12,16 @@ export default function QuizInfo({test, testData}: any) {
       <QuizRun testData={testData} testId={test.id}/>
     ) : (
       <>
-    	<div className={`mb-6 text-center`}>
-        <h1 className={`text-xl mb-2 font-semibold`}>
+    	<div className="mb-6 text-center">
+        <h1 className="text-xl mb-2 font-semibold">
           {test?.name}
         </h1>
         <p>
           <b>Автор:</b> {test?.author}
         </p>
       </div>
-      <div className={`mb-6`}>
-        <p className={`text-lg mb-2`}>
+      <div className="mb-6">
+        <p className="text-lg mb-2">
           <b>Инструкция:</b>
         </p>
         <p>
