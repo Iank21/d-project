@@ -159,19 +159,18 @@ export async function getUserRole(email: string) {
 }
 
 // Возвращаем данные для диаграммы стресса
-export async function getStressHistory(id: string): Promise<StressItem[]> {
-  const data = await prisma.history_Stress.findMany({
-    where: { user_id: id }
-  });
+export async function getStressHistory(id: string) {
+  try {
+    const data = await prisma.history_Stress.findMany({
+      where: { user_id: id }
+    });
 
-  return data;
-  
-  // try {
-
-  // } catch (error) {
-  //   console.error('Database Error:', error);
-  // }
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+  }
 }
+
 
 // Возвращаем данные для диаграммы выгорания
 export async function getBurnuotHistory(id: string) {
@@ -207,3 +206,24 @@ export async function getAllStressHistory() {
     console.error('Database Error:', error);
   }
 }
+
+// export async function createOverWorkHistory(date: any, hours: any) {
+//   const cookieStore = await cookies();
+
+//   let user = cookieStore.get('userId');
+
+//   if(user) {
+//     try {
+//       await prisma.history_Overworking.create({
+//         data: {
+//           date: date,
+//           hours: hours,
+//           user_id: user.value,
+//         },
+//       });
+      
+//     } catch (error) {
+//       console.error('Database Error:', error);
+//     }
+//   }
+// }

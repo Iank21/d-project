@@ -1,4 +1,4 @@
-import { OverworkingForm } from "@/app/ui/forms/overworking-form";
+import OverworkingForm from "@/app/ui/forms/overworking-form";
 
 export default async function Page() {
 

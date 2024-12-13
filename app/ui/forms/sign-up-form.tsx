@@ -1,4 +1,4 @@
-import { signUp } from "@/app/features/auth/actions/sign-up";
+import { signUp } from "@/app/features/actions/sign-up";
 
 export default function SignUpForm() {
   return (

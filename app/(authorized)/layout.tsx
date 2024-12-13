@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { getAuth } from "../features/auth/queries/get-auth";
+import { getAuth } from "../features/queries/get-auth";
 import SideNav from "../ui/sidenav";
 import { getUserRole } from "../features/data/data";
 

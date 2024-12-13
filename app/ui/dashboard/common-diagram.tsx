@@ -4,11 +4,12 @@ import Chart from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 interface BarChartProps {
+  date: string[];
   amounts: number[];
   name: string;
 }
 
-const CommonDiagram: React.FC<BarChartProps> = ({ amounts, name }) => {
+const CommonDiagram: React.FC<BarChartProps> = ({ date, amounts, name }) => {
   const chartRef = useRef<HTMLCanvasElement | null>(null);
 
   let chartColors = ['grey', 'grey', 'grey', 'grey', 'grey', 'grey', 'grey', 'grey', 'grey', 'grey', 'grey', 'grey'];
@@ -36,7 +37,7 @@ const CommonDiagram: React.FC<BarChartProps> = ({ amounts, name }) => {
       const chartInstance = new Chart(chartRef.current, {
           type: 'bar',
           data: {
-            labels: ['янв', 'фев', 'мрт', 'апр', 'май', 'июнь', 'июль', 'авг', 'сент', 'окт', 'нояб', 'дек'],
+            labels: date,
             datasets: [
               {
                 data: amounts,

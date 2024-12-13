@@ -84,7 +84,7 @@ model History_Stress {
 
 model History_Overworking {
   id              String      @id @default(cuid())
-  date            DateTime    @default(now())
+  date            String      
   hours           Int
 
   user            User        @relation(fields: [user_id], references: [id])

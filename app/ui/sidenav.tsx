@@ -1,7 +1,7 @@
 import Image from "next/image";
 import NavLinks from './nav-links';
 import { PowerIcon } from './icons';
-import { signOut } from "../features/auth/actions/sign-out";
+import { signOut } from "../features/actions/sign-out";
 
 export default function SideNav() {
   return (
