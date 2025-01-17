@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import { getAuth } from "../features/queries/get-auth";
-import SideNav from "../ui/sidenav";
+import { getAuth } from "../../features/actions/get-auth";
+import SideNav from "@/view/Navigation/SideNav";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const { user } = await getAuth();

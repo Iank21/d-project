@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "./ui/globals.css";
-import { cairo } from "./ui/fonts";
+import "../view/globals.css";
+import { cairo } from "../view/fonts";
 
 export const metadata: Metadata = {
   title: "D-project",

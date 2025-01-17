@@ -1,4 +1,4 @@
-import TestCard from "@/app/ui/tests/testsCard";
+import TestCard from "@/view/Component/TestsCardComponent";
 
 export default function Page() {
 

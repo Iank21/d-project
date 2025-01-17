@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "./ui/icons";
+import { ArrowRight } from "../view/icons";
 
 export default function Home() {
   return (

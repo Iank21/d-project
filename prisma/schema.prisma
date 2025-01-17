@@ -6,8 +6,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Test {
@@ -20,6 +20,7 @@ model Test {
   Question        Question[]
   Answer          Answer[]
   Interpretation  Interpretation[]
+  Recomendation Recomendation[]
 }
 
 model Question {
@@ -41,6 +42,16 @@ model Answer {
 }
 
 model Interpretation {
+  id                   String      @id
+  description          String
+  maxPoint             Int
+  minPoint             Int
+
+  test                 Test        @relation(fields: [test_id], references: [id])
+  test_id              String
+}
+
+model Recomendation {
   id                   String      @id
   description          String
   maxPoint             Int

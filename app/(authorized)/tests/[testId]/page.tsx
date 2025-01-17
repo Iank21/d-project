@@ -1,6 +1,6 @@
-import { Question_Answer } from '@/app/features/data/definitions';
-import { getAnswersForOneTest, getQuestionsForOneTest, getTestInfo } from '@/app/features/data/data';
-import QuizInfo from '@/app/ui/tests/quizInfo';
+import { Question_Answer } from '@/features/data/definitions';
+import { getAnswersForOneTest, getQuestionsForOneTest, getTestInfo } from '@/features/data/data';
+import QuizInfo from '@/view/Component/QuizInfoComponent';
 
 export default async function Page({ params }: any) {
 

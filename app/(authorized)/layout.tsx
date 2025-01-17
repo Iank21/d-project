@@ -1,21 +1,12 @@
 import { redirect } from "next/navigation";
-import { getAuth } from "../features/queries/get-auth";
-import SideNav from "../ui/sidenav";
-import { getUserRole } from "../features/data/data";
+import { getAuth } from "../../features/actions/get-auth";
+import SideNav from "@/view/Navigation/SideNav";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const { user } = await getAuth();
 
   if (!user) {
     redirect('/login');
-  }
-
-  const userRole = await getUserRole(user.email);
-
-  if(userRole === "ADMIN") {
-
-  } else {
-
   }
   
   return (

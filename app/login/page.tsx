@@ -1,7 +1,15 @@
-import SignInForm from "../ui/forms/sign-in-form";
+import { getAuth } from "@/features/actions/get-auth";
+import SignInForm from "../../view/Forms/SignInForm";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
-export default function Page() {
+export default async function Page() {
+
+  const { user } = await getAuth();
+
+  if (user) {
+    redirect('/dashboard');
+  }
 
   return (
     <div className="flex min-h-screen flex-col p-6">
