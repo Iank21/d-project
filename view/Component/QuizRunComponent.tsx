@@ -106,6 +106,13 @@ export default function QuizRun({testData, testId}: any) {
     }
   }
 
+  let commonPoint = 0;
+  const term1 = (quizResultMbi.param_1 / 54) ** 2;
+  const term2 = (quizResultMbi.param_2 / 30) ** 2;
+  const term3 = (1 - (quizResultMbi.param_3 / 48)) ** 2;
+
+  commonPoint =  Math.sqrt((term1 + term2 + term3) / 3);
+
   return (
     <>
     <div>
@@ -128,7 +135,7 @@ export default function QuizRun({testData, testId}: any) {
           ) : (
             <>
               <button className="cursor-pointer w-fit flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base" 
-              onClick={() => createHistoryTest(result, testId, level)}>Посмотреть результат</button>
+              onClick={() => createHistoryTest(result, testId, level, commonPoint)}>Посмотреть результат</button>
             </>
           )}
       </div>

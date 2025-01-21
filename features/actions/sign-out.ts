@@ -24,6 +24,7 @@ export const signOut = async (_formData: FormData) => {
   );
 
   cookieStore.delete('userId')
+  cookieStore.delete('auth_session')
 
   redirect('/');
 };

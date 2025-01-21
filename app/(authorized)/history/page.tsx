@@ -8,15 +8,13 @@ import { cookies } from "next/headers";
 
 export default async function Page() {
 
-  // Получаем ID текущего пользователя
   const cookieStore = await cookies();
   const user = cookieStore.get('userId');
 
-  let stress;  // контейтер для истории стресса
-  let burnuot; // контейтер для истории выгорания
+  let stress;  
+  let burnuot; 
   let overworking;
 
-  // Если пользователь получен, получаем историю записей
   if(user) {
     stress = await getStressHistory(user.value);
     burnuot = await getBurnuotHistory(user.value);
@@ -44,6 +42,7 @@ export default async function Page() {
             id: burnuot[i].id,
             date: burnuot[i].date,
             user_id: burnuot[i].user_id,
+            commonPoint: burnuot[i].commonPoint,
             item: itemArray
           }
         )

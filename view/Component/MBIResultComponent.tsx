@@ -3,6 +3,8 @@ import { BurnoutWithItem } from "@/features/data/definitions";
 import { $Enums } from "@prisma/client";
 
 export default async function MBIResultComponent({result, interpretation, recommendation}: any) { 
+  console.log(result)
+  
   let newBurnOutArray: BurnoutWithItem; 
   let x;
   if (result){
@@ -23,63 +25,67 @@ export default async function MBIResultComponent({result, interpretation, recomm
   newBurnOutArray = {
     id: result.id,
     date: result.date,
+    commonPoint: result.commonPoint,
     user_id: result.user_id,
     item: itemArray
   }
 
-  let index = 0;
-  const term1 = (itemArray[0].point / 54) ** 2;
-  const term2 = (itemArray[1].point / 30) ** 2;
-  const term3 = (1 - (itemArray[2].point / 48)) ** 2;
-
-  index =  Math.sqrt((term1 + term2 + term3) / 3);
-
-  let interpretation_exhaustion = ''; 
-  let interpretation_depersonalization = ''; 
-  let interpretation_reduction = ''; 
+  let inter_exhaustion = ''; 
+  let recom_exhaustion = '';
+  let inter_depersonalization = ''; 
+  let recom_depersonalization = '';
+  let inter_reduction = ''; 
+  let recom_reduction = ''; 
 
   newBurnOutArray.item.map((item: any) => {
     if(item.name === 'Эмоциональное истощение') {
       if(item.level === 'HIGH') {
-        interpretation?.filter((item: any) => {if(item.id === 'exhaustion-high') {interpretation_exhaustion = item.description}})
+        interpretation?.filter((item: any) => {if(item.name === 'Эмоциональное истощение' && item.level === 'HIGH') {inter_exhaustion = item.description}})
+        recommendation?.filter((item: any) => {if(item.name === 'Эмоциональное истощение' && item.level === 'HIGH') {recom_exhaustion = item.description}})
       }  else if (item.level === 'MEDIUM') {
-        interpretation?.filter((item: any) => {if(item.id === 'exhaustion-normal') {interpretation_exhaustion = item.description}})
+        interpretation?.filter((item: any) => {if(item.name === 'Эмоциональное истощение' && item.level === 'MEDIUM') {inter_exhaustion = item.description}})
+        recommendation?.filter((item: any) => {if(item.name === 'Эмоциональное истощение' && item.level === 'MEDIUM') {recom_exhaustion = item.description}})
       } else {
-        interpretation?.filter((item: any) => {if(item.id === 'exhaustion-low') {interpretation_exhaustion = item.description}})
+        interpretation?.filter((item: any) => {if(item.name === 'Эмоциональное истощение' && item.level === 'LOW') {inter_exhaustion = item.description}})
+        recommendation?.filter((item: any) => {if(item.name === 'Эмоциональное истощение' && item.level === 'LOW') {recom_exhaustion = item.description}})
       }
     }
     if(item.name === 'Деперсонализация') {
       if(item.level === 'HIGH') {
-        interpretation?.filter((item: any) => {if(item.id === 'depersonalization-high') {interpretation_depersonalization = item.description}})
+        interpretation?.filter((item: any) => {if(item.name === 'Деперсонализация' && item.level === 'HIGH') {inter_depersonalization = item.description}})
+        recommendation?.filter((item: any) => {if(item.name === 'Деперсонализация' && item.level === 'HIGH') {recom_depersonalization = item.description}})
       }  else if (item.level === 'MEDIUM') {
-        interpretation?.filter((item: any) => {if(item.id === 'depersonalization-normal') {interpretation_depersonalization = item.description}})
+        interpretation?.filter((item: any) => {if(item.name === 'Деперсонализация' && item.level === 'MEDIUM') {inter_depersonalization = item.description}})
+        recommendation?.filter((item: any) => {if(item.name === 'Деперсонализация' && item.level === 'MEDIUM') {recom_depersonalization = item.description}})
       } else {
-        interpretation?.filter((item: any) => {if(item.id === 'depersonalization-low') {interpretation_depersonalization = item.description}})
+        interpretation?.filter((item: any) => {if(item.name === 'Деперсонализация' && item.level === 'LOW') {inter_depersonalization = item.description}})
+        recommendation?.filter((item: any) => {if(item.name === 'Деперсонализация' && item.level === 'LOW') {recom_depersonalization = item.description}})
       }
     }
     if(item.name === 'Редукция личных достижений') {
       if(item.level === 'HIGH') {
-        interpretation?.filter((item: any) => {if(item.id === 'reduction-high') {interpretation_reduction = item.description}})
+        interpretation?.filter((item: any) => {if(item.name === 'Редукция профессиональных достижений' && item.level === 'HIGH') {inter_reduction = item.description}})
+        recommendation?.filter((item: any) => {if(item.name === 'Редукция профессиональных достижений' && item.level === 'HIGH') {recom_reduction = item.description}})
       }  else if (item.level === 'MEDIUM') {
-        interpretation?.filter((item: any) => {if(item.id === 'reduction-normal') {interpretation_reduction = item.description}})
+        interpretation?.filter((item: any) => {if(item.name === 'Редукция профессиональных достижений' && item.level === 'MEDIUM') {inter_reduction = item.description}})
+        recommendation?.filter((item: any) => {if(item.name === 'Редукция профессиональных достижений' && item.level === 'MEDIUM') {recom_reduction = item.description}})
       } else {
-        interpretation?.filter((item: any) => {if(item.id === 'reduction-low') {interpretation_reduction = item.description}})
+        interpretation?.filter((item: any) => {if(item.name === 'Редукция профессиональных достижений' && item.level === 'LOW') {inter_reduction = item.description}})
+        recommendation?.filter((item: any) => {if(item.name === 'Редукция профессиональных достижений' && item.level === 'LOW') {recom_reduction = item.description}})
       }
     }
   })
 
   return(
     <>
-      <div className="">
-        {newBurnOutArray.item.map((item: any) => (
-          <div key={item.id}>
-            {item.name}: {item.point} <span className="text-red-700">{item.level === 'HIGH' ? '[высокий уровень]' : ''}</span> <span className="text-orange-500">{item.level === 'MEDIUM' ? '[средний уровень]' : ''}</span> <span className="text-green-600">{item.level === 'LOW' ? '[низкий уровень]' : ''}</span>
-          </div>
-        ))}
 
-        <div>
-          Системный индекс синдрома перегорания: {index.toFixed(2)}
+      {newBurnOutArray.item.map((item: any) => (
+        <div key={item.id}>
+          {item.name}: {item.point} <span className="text-red-700">{item.level === 'HIGH' ? '[высокий уровень]' : ''}</span> <span className="text-orange-500">{item.level === 'MEDIUM' ? '[средний уровень]' : ''}</span> <span className="text-green-600">{item.level === 'LOW' ? '[низкий уровень]' : ''}</span>
         </div>
+      ))}
+      <div>
+        Системный индекс синдрома перегорания: {newBurnOutArray.commonPoint.toFixed(2)}
       </div>
 
       <div className="">
@@ -90,27 +96,44 @@ export default async function MBIResultComponent({result, interpretation, recomm
           Эмоциональное истощение
         </h3>
         <p>
-        {interpretation_exhaustion}
+        {inter_exhaustion}
         </p>
         <h3 className="my-1 text-base	font-bold">
           Деперсонализация
         </h3>
         <p>
-        {interpretation_depersonalization}
+        {inter_depersonalization}
         </p>
         <h3 className="my-1 text-base	font-bold">
           Редукция проф. достижений
         </h3>
         <p>
-        {interpretation_reduction}
+        {inter_reduction}
         </p>
       </div>
 
       <div className="">
-        {/* <h2 className="my-5 text-lg md:text-xl font-bold">
+        <h2 className="my-5 text-lg md:text-xl font-bold">
           Рекомендации
         </h2>
-        {recommendation} */}
+        <h3 className="my-1 text-base	font-bold">
+          Эмоциональное истощение
+        </h3>
+        <p>
+          {recom_exhaustion}
+        </p>
+        <h3 className="my-1 text-base	font-bold">
+          Деперсонализация
+        </h3>
+        <p>
+          {recom_depersonalization}
+        </p>
+        <h3 className="my-1 text-base	font-bold">
+          Редукция проф. достижений
+        </h3>
+        <p>
+          {recom_reduction}
+        </p>
       </div>
     </>
   );

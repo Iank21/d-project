@@ -32,6 +32,20 @@ const CommonDiagram: React.FC<BarChartProps> = ({ date, amounts, name }) => {
     }
   }
 
+  if(name === 'Статистика сверхурочной работы') {
+    for(let i = 0; i < amounts.length; i++) {
+      if(amounts[i] < 21 && amounts[i] > 0) {
+        chartColors[i] = '#7AD361'
+      }
+      if(amounts[i] < 31 && amounts[i] > 20) {
+        chartColors[i] = '#DDBA4F'
+      }
+      if(amounts[i] > 30) {
+        chartColors[i] = '#D75454'
+      }
+    }
+  }
+
   useEffect(() => {
     if (chartRef.current) {
       const chartInstance = new Chart(chartRef.current, {
@@ -77,7 +91,7 @@ const CommonDiagram: React.FC<BarChartProps> = ({ date, amounts, name }) => {
     }
   }, [amounts]);
 
-  return <canvas className='max-h-80 max-w-md' ref={chartRef} />;
+  return <canvas className='max-size-canvas-common' ref={chartRef} />;
 };
 
 export default CommonDiagram;

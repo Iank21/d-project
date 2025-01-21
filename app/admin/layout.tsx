@@ -8,6 +8,8 @@ export default async function Layout({ children }: { children: React.ReactNode }
   if (!user) {
     redirect('/login');
   }
+
+  // добавит ьпроверку роли
   
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">

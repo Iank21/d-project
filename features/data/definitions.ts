@@ -57,6 +57,7 @@ export type BurnoutWithItem = {
   id: string;
   date: Date;
   user_id: string;
+  commonPoint: number;
   item: {
     name: string;
     point: number;

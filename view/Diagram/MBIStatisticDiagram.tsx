@@ -5,11 +5,11 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 interface BarChartProps {
   date: string[];
-  amounts: number[];
+  dataset: any[];
   name: string;
 }
 
-const MBIStatisticDiagram: React.FC<BarChartProps> = ({ date, amounts, name }) => {
+const MBIStatisticDiagram: React.FC<BarChartProps> = ({ date, dataset, name }) => {
   const chartRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -17,24 +17,8 @@ const MBIStatisticDiagram: React.FC<BarChartProps> = ({ date, amounts, name }) =
       const chartInstance = new Chart(chartRef.current, {
           type: 'bar',
           data: {
-            labels: ['Группа 1', 'Группа 2', 'Группа 3', 'Группа 4'],
-            datasets: [
-              {
-                  label: 'Серия A',
-                  data: [12, 19, 3, 5], // Dанные для первой группы
-                  backgroundColor: 'rgba(255, 99, 132, 0.5)',
-              },
-              {
-                  label: 'Серия B',
-                  data: [2, 3, 20, 15], // Данные для второй группы
-                  backgroundColor: 'rgba(54, 162, 235, 0.5)',
-              },
-              {
-                  label: 'Серия C',
-                  data: [3, 10, 13, 7], // Данные для третьей группы
-                  backgroundColor: 'rgba(75, 192, 192, 0.5)',
-              },
-            ],
+            labels: date,
+            datasets: dataset
           },
           plugins: [ChartDataLabels],
           options: {
@@ -47,24 +31,16 @@ const MBIStatisticDiagram: React.FC<BarChartProps> = ({ date, amounts, name }) =
                 display: false,
               },
               tooltip: {
-                enabled: false,
+                enabled: true,
               },
               title: {
                 display: true,
-                text: 'Групповая столбчатая диаграмма',
+                text: name,
                 color: 'black',
                 font: {
                   weight: 'bold',
                   size: 20,
                 }
-              },
-            },
-            scales: {
-              x: {
-                stacked: true,
-              },
-              y: {
-                stacked: true,
               },
             },
           },
@@ -74,9 +50,9 @@ const MBIStatisticDiagram: React.FC<BarChartProps> = ({ date, amounts, name }) =
         chartInstance.destroy();
       };
     }
-  }, [amounts]);
+  }, [dataset]);
 
-  return <canvas className='max-h-80 max-w-md' ref={chartRef} />;
+  return <canvas className='max-size-canvas' ref={chartRef} />;
 };
 
 export default MBIStatisticDiagram;

@@ -95,7 +95,7 @@ export async function getRecommendationForOneTest(id: string) {
 }
 
 
-export async function createHistoryTest(result: any, test_id: string, level: Level) {
+export async function createHistoryTest(result: any, test_id: string, level: Level, commonPoint: number) {
   const cookieStore = await cookies();
 
   let user = cookieStore.get('userId');
@@ -126,6 +126,7 @@ export async function createHistoryTest(result: any, test_id: string, level: Lev
           data: {
             user_id: user.value,
             date: now, 
+            commonPoint: commonPoint,
             History_Burnout_Item: {
               create: [
                 {
