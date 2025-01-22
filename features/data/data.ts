@@ -219,7 +219,7 @@ export async function getStressResult(user_id: string) {
         user_id
       },
       orderBy: {
-        date: 'asc'
+        date: 'desc'
       },
     });
 
@@ -237,7 +237,7 @@ export async function getBurnuotResult(user_id: string) {
         user_id
       },
       orderBy: {
-        date: 'asc'
+        date: 'desc'
       },
     });
 
