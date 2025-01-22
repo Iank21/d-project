@@ -1,16 +1,11 @@
 import { notFound } from 'next/navigation';
 import { getUser } from '@/features/data/data';
 import EditUserForm from '@/view/Forms/EditUserForm';
+import EditPasswordForm from '@/view/Forms/EditPasswordForm';
 
-type UserPageProps = Promise<{
-  params: string;
-}>;
-
-export default async function Page(props: { params: UserPageProps}) {
-  const { params } = await props.params;
-  const userId = params; 
-
-  const user = await getUser(userId);
+export default async function Page({ params }: any) {
+  const { id } = await params;
+  const user = await getUser(id);
 
   if (!user) {
     return notFound();
@@ -21,7 +16,10 @@ export default async function Page(props: { params: UserPageProps}) {
       <h1 className="mb-6 text-xl md:text-2xl font-bold">
         Изменить пользователя
       </h1>
-      <EditUserForm user={user}/>   
+      <div className="flex gap-24">
+        <EditUserForm user={user}/>
+        <EditPasswordForm user={user}/>
+      </div>
     </>
   );
 }

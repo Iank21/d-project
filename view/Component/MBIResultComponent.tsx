@@ -3,8 +3,6 @@ import { BurnoutWithItem } from "@/features/data/definitions";
 import { $Enums } from "@prisma/client";
 
 export default async function MBIResultComponent({result, interpretation, recommendation}: any) { 
-  console.log(result)
-  
   let newBurnOutArray: BurnoutWithItem; 
   let x;
   if (result){
@@ -78,63 +76,56 @@ export default async function MBIResultComponent({result, interpretation, recomm
 
   return(
     <>
-
       {newBurnOutArray.item.map((item: any) => (
         <div key={item.id}>
           {item.name}: {item.point} <span className="text-red-700">{item.level === 'HIGH' ? '[высокий уровень]' : ''}</span> <span className="text-orange-500">{item.level === 'MEDIUM' ? '[средний уровень]' : ''}</span> <span className="text-green-600">{item.level === 'LOW' ? '[низкий уровень]' : ''}</span>
         </div>
       ))}
       <div>
-        Системный индекс синдрома перегорания: {newBurnOutArray.commonPoint.toFixed(2)}
+        Системный индекс синдрома перегорания: {Math.trunc(newBurnOutArray.commonPoint*100)/100}
       </div>
-
-      <div className="">
-        <h2 className="my-5 text-lg md:text-xl font-bold">
+      <h2 className="my-5 text-lg md:text-xl font-bold">
           Интерпретации
-        </h2>
-        <h3 className="my-1 text-base	font-bold">
+      </h2>
+      <h3 className="my-1 text-base	font-bold">
           Эмоциональное истощение
-        </h3>
-        <p>
+      </h3>
+      <p>
         {inter_exhaustion}
-        </p>
-        <h3 className="my-1 text-base	font-bold">
-          Деперсонализация
-        </h3>
-        <p>
+      </p>
+      <h3 className="my-1 text-base	font-bold">
+        Деперсонализация
+      </h3>
+      <p>
         {inter_depersonalization}
-        </p>
-        <h3 className="my-1 text-base	font-bold">
-          Редукция проф. достижений
-        </h3>
-        <p>
+      </p>
+      <h3 className="my-1 text-base	font-bold">
+        Редукция проф. достижений
+      </h3>
+      <p>
         {inter_reduction}
-        </p>
-      </div>
-
-      <div className="">
-        <h2 className="my-5 text-lg md:text-xl font-bold">
-          Рекомендации
-        </h2>
-        <h3 className="my-1 text-base	font-bold">
-          Эмоциональное истощение
-        </h3>
-        <p>
-          {recom_exhaustion}
-        </p>
-        <h3 className="my-1 text-base	font-bold">
-          Деперсонализация
-        </h3>
-        <p>
-          {recom_depersonalization}
-        </p>
-        <h3 className="my-1 text-base	font-bold">
-          Редукция проф. достижений
-        </h3>
-        <p>
-          {recom_reduction}
-        </p>
-      </div>
+      </p>
+      <h2 className="my-5 text-lg md:text-xl font-bold">
+        Рекомендации
+      </h2>
+      <h3 className="my-1 text-base	font-bold">
+        Эмоциональное истощение
+      </h3>
+      <p>
+        {recom_exhaustion}
+      </p>
+      <h3 className="my-1 text-base	font-bold">
+        Деперсонализация
+      </h3>
+      <p>
+        {recom_depersonalization}
+      </p>
+      <h3 className="my-1 text-base	font-bold">
+        Редукция проф. достижений
+      </h3>
+      <p>
+        {recom_reduction}
+      </p>
     </>
   );
 }
