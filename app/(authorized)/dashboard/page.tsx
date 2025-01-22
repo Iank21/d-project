@@ -129,6 +129,7 @@ export default async function Page() {
     lastBurnout = burnuot[0].commonPoint;
 
     for (const entry of burnuot) {
+
       const date = new Date(entry.date);
       const month = date.getMonth();
       const year = date.getFullYear();
@@ -137,7 +138,7 @@ export default async function Page() {
         item.Month === getMonthName(month) && item.Year === year
       );
   
-      if (historyEntry) {
+      if (historyEntry && historyEntry.Item.length === 0) {
         let x = await getBurnuotItemHistory(entry.id);
         historyEntry.Item = x;
       }
