@@ -71,6 +71,8 @@ export default async function Page() {
     pointStress.push(item.Point);
   })
 
+  let lastStress = fullYearStressArray[0].Point;
+
   // 
   // Блок сортировки массива с переработками
   // 
@@ -107,6 +109,8 @@ export default async function Page() {
     hoursOver.push(item.Hours);
   });
 
+  let lastOver = fullYearOverworkingArray[0].Hours;
+
   // 
   // Блок сортировки массива с выгоранием
   // 
@@ -119,9 +123,11 @@ export default async function Page() {
     fullYearBurnoutArray[i] = { Month: monthNames[monthIndex], Year: currentYear - Math.abs(yearOffset), Item: []};
   }
 
+  let lastBurnout = 0;
   if(burnuot) {
     burnuot.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
-    
+    lastBurnout = burnuot[0].commonPoint;
+
     for (const entry of burnuot) {
       const date = new Date(entry.date);
       const month = date.getMonth();
@@ -146,14 +152,25 @@ export default async function Page() {
     const dataset: {
       label: string;
       data: number[];
+      backgroundColor: string[];
     } = {
       label: type,
       data: [],
+      backgroundColor: []
     };
     
     fullYearBurnoutArray.forEach(entry => {
       const item = entry.Item.find((i: any) => i.name === type);
       dataset.data.push(item ? item.point : 0);
+      if(item && item.level === 'HIGH') {
+        dataset.backgroundColor.push('#D75454');
+      } else if(item && item.level === 'MEDIUM') {
+        dataset.backgroundColor.push('#DDBA4F');
+      } else if(item && item.level === 'LOW') {
+        dataset.backgroundColor.push('#7AD361');
+      } else {
+        dataset.backgroundColor.push('grey');
+      }
     });
     
     datasetsBurnout.push(dataset);
@@ -164,7 +181,7 @@ export default async function Page() {
       <h1 className="mb-6 text-xl md:text-2xl font-bold">
         Панель мониторинга
       </h1>
-      <CommonPoint/>
+      <CommonPoint stress={lastStress} overworking={lastOver} burnout={lastBurnout}/>
       <div className="mt-6">
         <div className="flex justify-between mb-6">
           <CommonDiagram date={dateStress} amounts={pointStress} name={"Статистика стресса"}/>
