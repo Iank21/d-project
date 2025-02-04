@@ -46,7 +46,7 @@ export default async function Page() {
   };
 
   if(stress) {
-    stress.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+    stress.sort((a: { date: string | number | Date; }, b: { date: string | number | Date; }) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
 
     stress.forEach(entry => {
       const date = entry.date;

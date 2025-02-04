@@ -4,7 +4,7 @@ import { FilterIcon } from '@/view/icons';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function StressHistoryTableAllUsers({ initialData }: any) {
+export default function BurnoutHistoryTableAllUsers({ initialData }: any) {
   
   const [data, setData] = useState(initialData);
   
@@ -36,7 +36,7 @@ export default function StressHistoryTableAllUsers({ initialData }: any) {
   return (
     <>
       <div className="text-lg	font-bold	my-4">
-        История показателя стресса
+        История показателя выгорания
       </div>
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-h-96">
@@ -63,9 +63,9 @@ export default function StressHistoryTableAllUsers({ initialData }: any) {
                   Отдел {FilterIcon}
                 </div>
               </th>
-              <th onClick={() => requestSort('point')} scope="col" className="px-6 py-3">
-                <div className="flex items-center cursor-pointer">
-                  Показатель {FilterIcon}
+              <th className="px-6 py-3">
+                <div className="flex items-center">
+                  Показатель
                 </div>
               </th>
               <th scope="col" className="px-6 py-3">
@@ -89,10 +89,14 @@ export default function StressHistoryTableAllUsers({ initialData }: any) {
                   {item.department}
                 </th>
                 <td className="px-6 py-4">
-                  {item.point} <span className="text-red-700">{item.level === 'HIGH' ? '[высокий уровень]' : ''}</span> <span className="text-orange-500">{item.level === 'MEDIUM' ? '[средний уровень]' : ''}</span> <span className="text-green-600">{item.level === 'LOW' ? '[низкий уровень]' : ''}</span>             
+                  {item.item.map((item: any) => 
+                    <div key={item.name}>
+                      {item.name}: {item.point} <span className="text-red-700">{item.level === 'HIGH' ? '[высокий уровень]' : ''}</span> <span className="text-orange-500">{item.level === 'MEDIUM' ? '[средний уровень]' : ''}</span> <span className="text-green-600">{item.level === 'LOW' ? '[низкий уровень]' : ''}</span>
+                    </div>
+                  )}                
                 </td> 
                 <td className="px-6 py-4 text-right">
-                  <Link href={`/admin/history/psm-25/${item.id}`} className="font-medium text-blue-600 hover:underline">Подробнее</Link>
+                  <Link href={`/admin/history/mbi/${item.id}`} className="font-medium text-blue-600 hover:underline">Подробнее</Link>
                 </td>
               </tr>
             ))}

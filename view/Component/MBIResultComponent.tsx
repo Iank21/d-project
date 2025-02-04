@@ -75,7 +75,7 @@ export default async function MBIResultComponent({result, interpretation, recomm
   })
 
   return(
-    <div key={123}>
+    <div>
       {newBurnOutArray.item.map((item: any) => (
         <div key={item.id}>
           {item.name}: {item.point} <span className="text-red-700">{item.level === 'HIGH' ? '[высокий уровень]' : ''}</span> <span className="text-orange-500">{item.level === 'MEDIUM' ? '[средний уровень]' : ''}</span> <span className="text-green-600">{item.level === 'LOW' ? '[низкий уровень]' : ''}</span>

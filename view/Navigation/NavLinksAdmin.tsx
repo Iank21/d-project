@@ -6,6 +6,11 @@ import clsx from 'clsx';
 import { TestIcon, HistoryIcon, ChartBarSquareIcon, UsersIcon } from '../icons';
 
 const links = [
+  {
+    name: 'Статистика',
+    href: '/admin',
+    icon: ChartBarSquareIcon,
+  },
   { 
     name: 'История записей сотрудников', 
     href: '/admin/history', 
@@ -16,16 +21,11 @@ const links = [
     href: '/admin/users',
     icon: UsersIcon,
   },
-  {
-    name: 'Статистика',
-    href: '/admin/statistics',
-    icon: ChartBarSquareIcon,
-  },
-  {
-    name: 'Список тестов',
-    href: '/admin/tests',
-    icon: TestIcon,
-  },
+  // {
+  //   name: 'Список тестов',
+  //   href: '/admin/tests',
+  //   icon: TestIcon,
+  // },
 ];
 
 export default function NavLinks() {

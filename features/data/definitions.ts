@@ -74,3 +74,39 @@ export type Users = {
   hashedPassword: string;
   role: Role;
 }
+
+export type StressWithUser = {
+  id: string;
+  date: Date;
+  point: number;
+  level: Level;
+  user_id: string;
+  name: string;
+  surname: string;
+  department: string;
+}
+
+export type OverworkingWithUser = {
+  id: string;
+  date: string;
+  hours: number;
+  user_id: string;
+  name: string;
+  surname: string;
+  department: string;
+}
+
+export type BurnoutWithItemAndUser = {
+  id: string;
+  date: Date;
+  user_id: string;
+  name: string;
+  surname: string;
+  department: string;
+  commonPoint: number;
+  item: {
+    name: string;
+    point: number;
+    level: Level;
+  }[]
+}

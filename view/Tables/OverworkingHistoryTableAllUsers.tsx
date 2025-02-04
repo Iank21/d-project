@@ -1,10 +1,8 @@
 'use client';
-import FullDateFormat from '@/view/fulldateformat';
 import { FilterIcon } from '@/view/icons';
-import Link from 'next/link';
 import { useState } from 'react';
 
-export default function StressHistoryTableAllUsers({ initialData }: any) {
+export default function OverworkingHistoryTableAllUsers({ initialData }: any) {
   
   const [data, setData] = useState(initialData);
   
@@ -36,7 +34,7 @@ export default function StressHistoryTableAllUsers({ initialData }: any) {
   return (
     <>
       <div className="text-lg	font-bold	my-4">
-        История показателя стресса
+        История сверхурочной работы
       </div>
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-h-96">
@@ -46,6 +44,11 @@ export default function StressHistoryTableAllUsers({ initialData }: any) {
               <th onClick={() => requestSort('date')} scope="col" className="px-6 py-3">
                 <div className="flex items-center cursor-pointer">
                   Дата {FilterIcon}
+                </div>
+              </th>
+              <th onClick={() => requestSort('hours')} scope="col" className="px-6 py-3">
+                <div className="flex items-center cursor-pointer">
+                  Часы {FilterIcon}
                 </div>
               </th>
               <th onClick={() => requestSort('name')} scope="col" className="px-6 py-3">
@@ -63,22 +66,17 @@ export default function StressHistoryTableAllUsers({ initialData }: any) {
                   Отдел {FilterIcon}
                 </div>
               </th>
-              <th onClick={() => requestSort('point')} scope="col" className="px-6 py-3">
-                <div className="flex items-center cursor-pointer">
-                  Показатель {FilterIcon}
-                </div>
-              </th>
-              <th scope="col" className="px-6 py-3">
-                <span className="sr-only"> Подробнее </span>
-              </th>
             </tr>
           </thead>
           <tbody>
             {sortedData.map((item) => (
               <tr key={item.id} className="bg-white border-b">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                  {FullDateFormat(item.date)}
+                  {item.date}
                 </th>
+                <td className="px-6 py-4">
+                  {item.hours}
+                </td> 
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                   {item.name}
                 </th>
@@ -88,12 +86,6 @@ export default function StressHistoryTableAllUsers({ initialData }: any) {
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                   {item.department}
                 </th>
-                <td className="px-6 py-4">
-                  {item.point} <span className="text-red-700">{item.level === 'HIGH' ? '[высокий уровень]' : ''}</span> <span className="text-orange-500">{item.level === 'MEDIUM' ? '[средний уровень]' : ''}</span> <span className="text-green-600">{item.level === 'LOW' ? '[низкий уровень]' : ''}</span>             
-                </td> 
-                <td className="px-6 py-4 text-right">
-                  <Link href={`/admin/history/psm-25/${item.id}`} className="font-medium text-blue-600 hover:underline">Подробнее</Link>
-                </td>
               </tr>
             ))}
           </tbody>

@@ -21,12 +21,10 @@ export default function SideNavAdmin() {
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinksAdmin />
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
-          <div className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-blue-500 p-3 text-sm font-medium hover:bg-blue-400 text-white md:flex-none md:justify-start md:p-2 md:px-3">
+          <form action={signOut} className="cursor-pointer flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-blue-500 p-3 text-sm font-medium hover:bg-blue-400 text-white md:flex-none md:justify-start md:p-2 md:px-3">
             {PowerIcon}
-            <form action={signOut}>
-              <button className="hidden md:block" type="submit">Выйти</button>
-            </form>
-          </div>
+            <button className="hidden md:block" type="submit">Выйти</button>
+          </form>
       </div>
     </div>
   );

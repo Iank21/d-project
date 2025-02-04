@@ -325,3 +325,33 @@ export async function getBurnoutHistoryResult(id: string) {
     console.error('Database Error:', error);
   }
 }
+
+export async function getStressHistoryAll() {
+  try {
+    const data = await prisma.history_Stress.findMany();
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+  }
+}
+
+export async function getBurnuotHistoryAll() {
+  try {
+    const data = await prisma.history_Burnout.findMany();
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+  }
+}
+
+export async function getOverworkingHistoryAll() {
+  try {
+    const data = await prisma.history_Overworking.findMany();
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+  }
+}
