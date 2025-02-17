@@ -229,7 +229,7 @@ export default async function Page() {
 
       <div className="flex flex-row gap-10">
       <div className="rounded-md bg-gray-50 p-3 gap-3 flex flex-col max-w-xl mb-5">
-          <p className="font-bold">Среднее значение показателя стресса по всем сотрудникам за {monthNames[currentMonth]} {currentYear}:</p>
+          <p className="font-bold">Среднее значение показателя выгорания по всем сотрудникам за {monthNames[currentMonth]} {currentYear}:</p>
           <p>
             <span className="pr-3">{Math.trunc(averageBurnoutPointCurrentMonth.point*100)/100}</span>
             <span style={pointDisplay(averageBurnoutPointCurrentMonth.name)}>{averageBurnoutPointCurrentMonth.name}</span>
@@ -238,7 +238,7 @@ export default async function Page() {
         </div>
 
         <div className="rounded-md bg-gray-50 p-3 gap-3 flex flex-col max-w-xl">
-          <p className="font-bold">Среднее значение показателя стресса по всем сотрудникам за {monthNames[currentMonth - 1]} {currentYear}:</p>
+          <p className="font-bold">Среднее значение показателя выгорания по всем сотрудникам за {monthNames[currentMonth - 1]} {currentYear}:</p>
           <p>
             <span className="pr-3">{Math.trunc(averageBurnoutPointLastMonth.point*100)/100}</span> 
             <span style={pointDisplay(averageBurnoutPointLastMonth.name)}>{averageBurnoutPointLastMonth.name}</span>
