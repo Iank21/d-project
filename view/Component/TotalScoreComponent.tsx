@@ -6,7 +6,7 @@ export default function CommonPoint({stress, overworking, burnout}: any) {
     index = 'Стабильное состояние'
   } else if(stress > 155 && stress < 201 && overworking > 40 && burnout > 0.65) {
     index = 'Выраженное напряжение'
-  } else if(stress > 100 && stress < 156 && burnout){
+  } else if(stress > 100 && stress < 156 && burnout !== 0){
     index = 'Умеренное напряжение'
   }
 
